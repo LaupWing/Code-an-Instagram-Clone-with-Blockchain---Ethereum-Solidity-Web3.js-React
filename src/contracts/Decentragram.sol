@@ -14,15 +14,18 @@ contract Decentragram {
       address payable author;
    }
 
-   function uploadImage() public{
+   function uploadImage(
+      string memory _imageHash, 
+      string memory _description
+   ) public{
       imageCount++;
 
       images[imageCount] = Image(
-         1,
-         "abs123",
-         "Hello World",
-         10,
-         payable(address(0x0))
+         imageCount,
+         _imageHash,
+         _description,
+         0,
+         payable(address(msg.sender))
       );
    }
 }
