@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 contract Decentragram {
    string public name = "Decentragram";
    mapping(uint => Image) public images;
-
+   uint public imageCount = 0;
 
    struct Image{
       uint id;
@@ -15,7 +15,9 @@ contract Decentragram {
    }
 
    function uploadImage() public{
-      images[1] = Image(
+      imageCount++;
+
+      images[imageCount] = Image(
          1,
          "abs123",
          "Hello World",

@@ -27,4 +27,14 @@ contract('Decentragram', ([deployer, author, tipper]) => {
          assert.equal(name, 'Decentragram')
       })
    })
+
+   describe('images', async ()=>{
+      let result
+
+      it('creates images', async ()=>{
+         result = await decentragram.uploadImage()
+         let image = await decentragram.images(1)
+         console.log(image)
+      })
+   })
 })
