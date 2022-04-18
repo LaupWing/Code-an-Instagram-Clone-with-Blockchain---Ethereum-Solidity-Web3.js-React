@@ -14,6 +14,14 @@ contract Decentragram {
       address payable author;
    }
 
+   event ImageCreated(
+      uint id,
+      string hash,
+      string description,
+      uint tipAmount,
+      address payable author
+   );
+
    function uploadImage(
       string memory _imageHash, 
       string memory _description
@@ -26,6 +34,14 @@ contract Decentragram {
          _description,
          0,
          payable(address(msg.sender))
+      );
+
+      emit ImageCreated(
+         imageCount, 
+         _imageHash, 
+         _description, 
+         0,
+         payable(address(msg.sender)
       );
    }
 }
