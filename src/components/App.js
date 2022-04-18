@@ -9,27 +9,27 @@ import Main from './Main'
 
 class App extends Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      account: '',
-    }
-  }
+   constructor(props) {
+      super(props)
+      this.state = {
+         account: '',
+      }
+   }
 
-  render() {
-    return (
-      <div>
-        <Navbar account={this.state.account} />
-        { this.state.loading
-          ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
-          : <Main
-            // Code...
-            />
-          }
+   render() {
+      return (
+         <div>
+            <Navbar account={this.state.account} />
+            {this.state.loading
+               ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
+               : <Main
+               // Code...
+               />
+            }
         }
-      </div>
-    );
-  }
+         </div>
+      );
+   }
 }
 
 export default App;
