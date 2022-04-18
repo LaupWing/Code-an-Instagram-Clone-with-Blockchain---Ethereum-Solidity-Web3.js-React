@@ -30,11 +30,21 @@ contract('Decentragram', ([deployer, author, tipper]) => {
 
    describe('images', async ()=>{
       let result
+      const hash = 'abc123'
+
+      before(async ()=>{
+         result = await decentragram.uploadImage(hash, 'Image description', {from: author})
+         imageCount = await decentragram.imageCount()
+      })
 
       it('creates images', async ()=>{
-         result = await decentragram.uploadImage()
-         let image = await decentragram.images(1)
-         console.log(image)
+         assert.equal(imageCount, 1)
+         const event = result.logs[0].args
+         assert.equal(event.id.toNumber(), imageCount.toNumber(), 'id is correct')
+         assert.equal(event.hash, hash, 'id is correct')
+         assert.equal(event.description, 'Image Description', 'description is correct')
+         assert.equal(event.tipAmount, '0', 'tip amount is correct')
+         assert.equal(event.author, author, 'author is correct')
       })
    })
 })
