@@ -26,6 +26,9 @@ contract Decentragram {
       string memory _imageHash, 
       string memory _description
    ) public{
+      require(bytes(_imageHash).length > 0);
+      require(bytes(_description).length > 0);
+      require(msg.sender != address(0x0));
       imageCount++;
 
       images[imageCount] = Image(
