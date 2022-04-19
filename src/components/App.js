@@ -6,6 +6,9 @@ import Decentragram from '../abis/Decentragram.json'
 import Navbar from './Navbar'
 import Main from './Main'
 
+const ipfsClient = require('ipfs-http-client')
+const ipfs = ipfsClient({host: 'ipfs.infura.io', port: 5001, protocol: 'https'})
+
 
 class App extends Component {
    async loadWeb3(){
@@ -73,7 +76,8 @@ class App extends Component {
          if(error){
             console.log(error)
          }else{
-            this.setState({true})
+            this.setState({laoding:true})
+
             this.state.decentragram.methods.uploadImage(result[0].hash, description).send({from: this.state.account}).on('transactionend', ()=>{
                this.setState({loading: false})
             })
