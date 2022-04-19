@@ -31,12 +31,31 @@ class App extends Component {
       this.setState({
          account: accounts[0]
       })
+
+      const networkId = await window.web3.eth.net.getId()
+      const networkData = Decentragram.networks[networkId]
+      if(networkData){
+         const decentragram = window.web3.eth.Contract(Decentragram.abi, networkData)
+         this.setState({
+            decentragram
+         })
+         const imagesCount = await decentragram.methods.imageCount().call()
+         this.setState({
+            imagesCount
+         })
+      }else{
+         window.alert('Decentragam is not deployed to this network!')
+      }
    }
 
    constructor(props) {
       super(props)
       this.state = {
          account: '',
+         decentragram: null,
+         imageCount: null,
+         images: [],
+         loading: true
       }
    }
 
