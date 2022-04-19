@@ -46,6 +46,17 @@ class App extends Component {
          this.setState({
             imagesCount
          })
+         // Load images
+         for (var i = 1; i <= imagesCount; i++) {
+            const image = await decentragram.methods.images(i).call()
+            this.setState({
+               images: [...this.state.images, image]
+            })
+         }
+         // Sort images. Show highest tipped images first
+         this.setState({
+            images: this.state.images.sort((a,b) => b.tipAmount - a.tipAmount )
+         })
          this.setState({
             laoding: false
          })
@@ -78,7 +89,7 @@ class App extends Component {
          }else{
             this.setState({laoding:true})
 
-            this.state.decentragram.methods.uploadImage(result[0].hash, description).send({from: this.state.account}).on('transactionend', ()=>{
+            this.state.decentragram.methods.uploadImage(result[0].hash, description).send({from: this.state.account}).on('transactionHash', ()=>{
                this.setState({loading: false})
             })
          }
