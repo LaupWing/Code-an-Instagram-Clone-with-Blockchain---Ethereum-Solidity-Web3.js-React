@@ -16,7 +16,11 @@ class Main extends Component {
                         const description = this.imageDescription.value
                         this.props.uploadImage(description)
                      }} >
-                        <input type='file' accept=".jpg, .jpeg, .png, .bmp, .gif" onChange={this.props.captureFile} />
+                        <input 
+                           type='file' 
+                           accept=".jpg, .jpeg, .png, .bmp, .gif" 
+                           onChange={this.props.captureFile} 
+                        />
                         <div className="form-group mr-sm-2">
                            <br></br>
                            <input
