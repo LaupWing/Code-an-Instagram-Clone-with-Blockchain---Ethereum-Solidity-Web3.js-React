@@ -96,12 +96,19 @@ class App extends Component {
       })
    }
 
+   tipImageOwner(id, tipAmount) {
+      this.setState({ loading: true })
+      this.state.decentragram.methods.tipImageOwner(id).send({ from: this.state.account, value: tipAmount }).on('transactionHash', (hash) => {
+        this.setState({ loading: false })
+      })
+    }
+
    constructor(props) {
       super(props)
       this.state = {
          account: '',
          decentragram: null,
-         imageCount: null,
+         imageCount: 0,
          images: [],
          loading: true
       }
@@ -115,6 +122,7 @@ class App extends Component {
                ? <div id="loader" className="text-center mt-5"><p>Loading...</p></div>
                : <Main
                   captureFile={this.captureFile}
+                  tipImageOwner={this.tipImageOwner}
                />
             }
          </div>
