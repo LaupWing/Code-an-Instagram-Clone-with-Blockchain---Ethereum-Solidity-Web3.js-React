@@ -21,6 +21,18 @@ class App extends Component {
       }
    }
 
+   async componentDidMount(){
+      await this.loadWeb3()
+      await this.loadBlockchainData()
+   }
+
+   async loadBlockchainData(){
+      const accounts = await window.web3.eth.getAccounts()
+      this.setState({
+         account: accounts[0]
+      })
+   }
+
    constructor(props) {
       super(props)
       this.state = {
